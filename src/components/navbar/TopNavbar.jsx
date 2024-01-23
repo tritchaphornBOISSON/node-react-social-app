@@ -10,9 +10,11 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
+import { AuthContext } from "../../context/authContext";
 
 const TopNavbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div className="topNavbar">
@@ -38,11 +40,8 @@ const TopNavbar = () => {
         <EmailOutlinedIcon />
         <NotificationsNoneOutlinedIcon />
         <div className="user">
-          <img
-            src="https://images.pexels.com/photos/3866555/pexels-photo-3866555.png"
-            alt=""
-          />
-          <span>John Doe</span>
+          <img src={currentUser.profilePic} alt="" />
+          <span>{currentUser.name}</span>
         </div>
       </div>
     </div>
