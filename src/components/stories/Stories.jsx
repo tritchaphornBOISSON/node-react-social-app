@@ -34,14 +34,12 @@ const Stories = () => {
         <span>{currentUser.name}</span>
         <button>+</button>
       </div>
-      {stories.map((story) => {
-        return (
-          <div className="story">
-            <img src={story.img} alt="" />
-            <span>{story.name}</span>
-          </div>
-        );
-      })}
+      {stories.map((story) => (
+        <div className="story" key={story.id}>
+          <img src={story.img} alt="" />
+          <span>{story.name}</span>
+        </div>
+      ))}
     </div>
   );
 };
