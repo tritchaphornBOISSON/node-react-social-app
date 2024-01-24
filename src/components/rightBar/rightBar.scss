@@ -74,12 +74,13 @@
 
             button {
               border: none;
-              padding: 5px;
+              padding: 6px;
               color: white;
               cursor: pointer;
+              border-radius: 3px;
 
               &:first-child {
-                background-color: #84a59d;
+                background-color: #46665e;
               }
 
               &:last-child {
