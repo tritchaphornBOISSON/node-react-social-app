@@ -4,15 +4,15 @@ import jwt from "jsonwebtoken";
 
 export const register = (req, res) => {
 
-    const query = "SELECT * FROM users WHERE username = ?";
+    const query = "SELECT * FROM users WHERE email = ?";
 
-    db.query(query, [req.body.username], (err, data) => {
+    db.query(query, [req.body.email], (err, data) => {
         if (err) {
             return res.status(500).json(err);
         }
 
         if (data.length) {
-            return res.status(409).json("User already exists!");
+            return res.status(409).json("Email address already exists!");
         }
 
         const salt = bcrypt.genSaltSync(10);
@@ -35,8 +35,8 @@ export const register = (req, res) => {
 }
 
 export const login = (req, res) => {
-    const query = "SELECT * FROM users WHERE username = ?";
-    db.query(query, [req.body.username], (err, data) => {
+    const query = "SELECT * FROM users WHERE email = ?";
+    db.query(query, [req.body.email], (err, data) => {
         if (err) {
             return res.status(500).json(err);
         }
@@ -48,7 +48,7 @@ export const login = (req, res) => {
         const checkPassword = bcrypt.compareSync(req.body.password, data[0].password);
 
         if (!checkPassword) {
-            return res.status(400).json("Wrong password or username!");
+            return res.status(400).json("Wrong password or email!");
         }
 
         const token = jwt.sign({ id: data[0].id }, "secretkey");

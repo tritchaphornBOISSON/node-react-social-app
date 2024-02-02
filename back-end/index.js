@@ -11,9 +11,18 @@ const app = express();
 const port = 5000;
 
 //middlewares
-app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Credentials", true);
+    next();
+})
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
